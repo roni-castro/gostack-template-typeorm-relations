@@ -1,9 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import IProductsRepository from '@modules/products/repositories/IProductsRepository';
-import ICustomersRepository from '@modules/customers/repositories/ICustomersRepository';
 import Order from '../infra/typeorm/entities/Order';
 import IOrdersRepository from '../repositories/IOrdersRepository';
+import AppError from '@shared/errors/AppError';
 
 interface IRequest {
   id: string;
@@ -12,13 +11,16 @@ interface IRequest {
 @injectable()
 class FindOrderService {
   constructor(
+    @inject('OrdersRepository')
     private ordersRepository: IOrdersRepository,
-    private productsRepository: IProductsRepository,
-    private customersRepository: ICustomersRepository,
   ) {}
 
   public async execute({ id }: IRequest): Promise<Order | undefined> {
-    // TODO
+    const order = await this.ordersRepository.findById(id);
+    if (!order) {
+      throw new AppError('Order not found', 404);
+    }
+    return order;
   }
 }
 
