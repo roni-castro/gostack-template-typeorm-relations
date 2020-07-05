@@ -10,6 +10,7 @@ import {
 
 import Order from '@modules/orders/infra/typeorm/entities/Order';
 import Product from '@modules/products/infra/typeorm/entities/Product';
+import ColumnNumericTransformer from '@shared/infra/typeorm/ColumnNumericTransformer';
 
 @Entity('orders_products')
 class OrdersProducts {
@@ -33,7 +34,7 @@ class OrdersProducts {
   @Column()
   price: number;
 
-  @Column()
+  @Column({ transformer: new ColumnNumericTransformer() })
   quantity: number;
 
   @CreateDateColumn()

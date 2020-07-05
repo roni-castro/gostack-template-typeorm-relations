@@ -24,7 +24,9 @@ class Product {
   @Column({ transformer: new ColumnNumericTransformer() })
   quantity: number;
 
-  @OneToMany(type => OrdersProducts, ordersProducts => ordersProducts.product)
+  @OneToMany(type => OrdersProducts, ordersProducts => ordersProducts.product, {
+    cascade: true,
+  })
   order_products: OrdersProducts[];
 
   @CreateDateColumn()

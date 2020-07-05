@@ -22,6 +22,21 @@ export class CreateOrdersProducts1593918496582 implements MigrationInterface {
             type: 'uuid',
           },
           {
+            name: 'price',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+          {
+            name: 'quantity',
+            type: 'numeric',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
