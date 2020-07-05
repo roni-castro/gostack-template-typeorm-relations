@@ -18,6 +18,11 @@ export class CreateOrders1593918182516 implements MigrationInterface {
             type: 'uuid',
           },
           {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',

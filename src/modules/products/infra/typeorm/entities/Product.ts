@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 
 import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
+import ColumnNumericTransformer from '@shared/infra/typeorm/ColumnNumericTransformer';
 
 @Entity('products')
 class Product {
@@ -20,7 +21,7 @@ class Product {
   @Column()
   price: number;
 
-  @Column()
+  @Column({ transformer: new ColumnNumericTransformer() })
   quantity: number;
 
   @OneToMany(type => OrdersProducts, ordersProducts => ordersProducts.product)
